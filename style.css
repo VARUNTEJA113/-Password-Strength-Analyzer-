@@ -1,0 +1,88 @@
+/* Password Strength Analyzer - V1 styles. Colors live in variables so themes are easy to add later. */
+:root{
+  --bg:#0e0a24; --panel:#181240; --panel2:#221a57; --line:#3a2f86;
+  --text:#f1eeff; --muted:#a9a2d6;
+  --cyan:#25e5ff; --pink:#ff3d81; --orange:#ff8a1f; --yellow:#ffd21f; --lime:#7dff6b; --green:#19e68c;
+  --accent:var(--cyan);
+  --display:"Arial Black","Segoe UI Black","Helvetica Neue",Impact,sans-serif;
+  --body:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,"SF Mono",Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{
+  margin:0;font-family:var(--body);color:var(--text);line-height:1.5;min-height:100vh;
+  background:
+    linear-gradient(var(--line) 1px,transparent 1px) 0 0/44px 44px,
+    linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/44px 44px,
+    radial-gradient(900px 500px at 85% -10%,#4b1f9e66,transparent),
+    var(--bg);
+  background-blend-mode:soft-light,soft-light,normal,normal;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(16px,4vw,48px)}
+
+/* Hero */
+.badge{display:inline-flex;gap:.6rem;align-items:center;margin:0 0 1.2rem;padding:.4rem .9rem;border:1px solid var(--cyan);color:var(--cyan);font:600 .85rem var(--mono);border-radius:99px;background:#25e5ff14}
+.dot{width:.55rem;height:.55rem;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 1.6s infinite}
+h1{font:900 clamp(3rem,11vw,7.5rem)/.9 var(--display);letter-spacing:-.04em;margin:0 0 1.2rem;text-transform:uppercase;
+   background:linear-gradient(95deg,#fff 0%,var(--cyan) 55%,var(--pink) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:54ch;color:var(--muted);font-size:1.1rem;margin:0 0 2.2rem}
+
+/* Layout */
+.grid{display:grid;grid-template-columns:1.25fr 1fr;gap:1.4rem;align-items:start}
+.stack{display:grid;gap:1.4rem}
+@media(max-width:880px){.grid{grid-template-columns:1fr}}
+.panel{background:linear-gradient(160deg,var(--panel),#120d33);border:2px solid var(--line);border-radius:18px;padding:clamp(1rem,3vw,1.7rem);box-shadow:8px 8px 0 #00000055}
+h2{font:900 1.35rem var(--display);margin:0 0 1rem;letter-spacing:-.01em}
+h3{font:700 1rem var(--body);margin:1.4rem 0 .4rem;color:var(--cyan)}
+.small{font-size:.85rem;color:var(--muted);margin:0}
+
+/* Input */
+.field{display:flex;gap:.5rem;flex-wrap:wrap}
+#pw{flex:1 1 220px;min-width:0;padding:1rem 1.1rem;font:600 1.15rem var(--mono);color:var(--text);background:#0a0720;border:2px solid var(--line);border-radius:12px;outline:none;transition:border-color .2s,box-shadow .2s}
+#pw:focus{border-color:var(--accent);box-shadow:0 0 0 4px #25e5ff2a}
+.btn{font:700 .95rem var(--body);padding:.85rem 1.2rem;border-radius:12px;border:2px solid var(--line);cursor:pointer;color:var(--text);transition:transform .12s,background .2s,box-shadow .2s}
+.btn.ghost{background:var(--panel2)}
+.btn.ghost:hover:not(:disabled){background:var(--line)}
+.btn.primary{background:var(--cyan);border-color:var(--cyan);color:#06122a;box-shadow:4px 4px 0 var(--pink)}
+.btn.primary:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--pink)}
+.btn.primary:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--pink)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+
+/* Verdict: the big memorable element */
+.verdict{margin-top:1.6rem;padding:1.2rem;border-radius:14px;background:#0a0720;border:2px dashed var(--line)}
+.level{font:900 clamp(2.2rem,8vw,4.2rem)/1 var(--display);text-transform:uppercase;letter-spacing:-.03em;margin:.2rem 0 1rem;color:var(--muted);transition:color .3s}
+.level[data-level="1"]{color:var(--pink);text-shadow:0 0 28px #ff3d8199}
+.level[data-level="2"]{color:var(--orange);text-shadow:0 0 28px #ff8a1f99}
+.level[data-level="3"]{color:var(--yellow);text-shadow:0 0 28px #ffd21f88}
+.level[data-level="4"]{color:var(--lime);text-shadow:0 0 28px #7dff6b88}
+.level[data-level="5"]{color:var(--green);text-shadow:0 0 34px #19e68caa}
+.meter{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem}
+.meter i{height:18px;border-radius:5px;background:var(--panel2);transition:background .3s,box-shadow .3s,transform .3s}
+.meter[data-level="1"] i:nth-child(-n+1){background:var(--pink);box-shadow:0 0 14px var(--pink)}
+.meter[data-level="2"] i:nth-child(-n+2){background:var(--orange);box-shadow:0 0 14px var(--orange)}
+.meter[data-level="3"] i:nth-child(-n+3){background:var(--yellow);box-shadow:0 0 14px var(--yellow)}
+.meter[data-level="4"] i:nth-child(-n+4){background:var(--lime);box-shadow:0 0 14px var(--lime)}
+.meter[data-level="5"] i:nth-child(-n+5){background:var(--green);box-shadow:0 0 14px var(--green)}
+.stats{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin:1rem 0 0;font:.85rem var(--mono);color:var(--muted)}
+.stats b{color:var(--text)}
+.plain{margin:0;padding-left:1.1rem;color:var(--text)}
+.plain li{margin:.3rem 0}
+
+/* Checks */
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.checks li{display:flex;gap:.7rem;align-items:center;padding:.6rem .8rem;border-radius:10px;background:#0a0720;border:1px solid var(--line);font-size:.95rem}
+.checks .ic{flex:none;width:1.6rem;height:1.6rem;display:grid;place-items:center;border-radius:50%;font-weight:900;background:var(--panel2);color:var(--muted)}
+.checks li.pass{border-color:#19e68c88}.checks li.pass .ic{background:var(--green);color:#042;}
+.checks li.fail{border-color:#ff3d8188}.checks li.fail .ic{background:var(--pink);color:#2a0010}
+.checks small{display:block;color:var(--muted)}
+
+/* Generator */
+.range{display:block;font-size:.95rem;color:var(--muted)}
+.range input{width:100%;accent-color:var(--pink);margin:.5rem 0 1rem}
+.genout{display:block;min-height:3.4rem;padding:.9rem;margin-bottom:1rem;border-radius:12px;background:#0a0720;border:2px solid var(--line);font:600 1.05rem var(--mono);word-break:break-all;color:var(--cyan)}
+.row{display:flex;gap:.6rem;flex-wrap:wrap}
+.foot{margin-top:2rem;color:var(--muted);font-size:.88rem;max-width:80ch}
+@keyframes pulse{50%{opacity:.35}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
