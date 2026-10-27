@@ -259,6 +259,7 @@ Possible future versions of the project may include:
 ## 📸 Screenshots
 
 Screenshots of the application will be added here to demonstrate the main features and user interface.
+<img width="1894" height="921" alt="Screenshot (19)" src="https://github.com/user-attachments/assets/cbe4c31a-c243-49e8-a2d5-b2a975e69f3c" />
 
 ---
 
