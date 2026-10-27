@@ -164,7 +164,7 @@ function render(){
   if (!pw){ renderEmpty(); return; }
   const r = analyze(pw);
   $("level").textContent = LEVELS[r.level - 1];
-  $("level").dataset.level = r.level;
+  $("verdict").dataset.level = r.level;
   $("meter").dataset.level = r.level;
   $("meter").setAttribute("aria-valuenow", r.score);
   $("score").textContent = r.score; $("len").textContent = r.len; $("ent").textContent = r.entropy;
@@ -172,7 +172,7 @@ function render(){
   renderChecks(r.checks);
 }
 function renderEmpty(){
-  $("level").textContent = "Waiting for input"; $("level").dataset.level = "none";
+  $("level").textContent = "Waiting for input"; $("verdict").dataset.level = "0";
   $("meter").dataset.level = "0"; $("meter").setAttribute("aria-valuenow", 0);
   $("score").textContent = 0; $("len").textContent = 0; $("ent").textContent = 0;
   fillList($("reasons"), ["Enter a password and the explanation appears here."]);
@@ -208,4 +208,16 @@ $("copy").addEventListener("click", async () => {
 });
 $("analyzeGen").addEventListener("click", () => { pwInput.value = generated; render(); });
 
+/* ---------- Theme toggle (saves only "light" or "dark", never a password) ---------- */
+function applyTheme(t){
+  document.documentElement.dataset.theme = t;
+  $("themeLabel").textContent = t === "dark" ? "Dark" : "Light";
+  $("themeBtn").setAttribute("aria-label", "Switch to " + (t === "dark" ? "light" : "dark") + " theme");
+}
+$("themeBtn").addEventListener("click", () => {
+  const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(next);
+  try { localStorage.setItem("vshield-theme", next); } catch { /* storage unavailable: ignore */ }
+});
+applyTheme(document.documentElement.dataset.theme || "dark");
 renderEmpty();
