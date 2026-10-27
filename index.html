@@ -3,24 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Offline password strength analysis tool. Runs entirely in your browser.">
-  <title>Password Strength Analyzer</title>
+  <meta name="description" content="VSHIELD Password Strength Analyzer. Runs entirely in your browser.">
+  <title>Password Strength Analyzer | VSHIELD</title>
+  <!-- Apply saved/system theme before paint to avoid a flash. Stores only "light" or "dark". -->
+  <script>
+    (function(){var t;try{t=localStorage.getItem("vshield-theme")}catch(e){}
+    if(!t){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}
+    document.documentElement.dataset.theme=t;})();
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="wrap">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z"/></symbol>
+  </svg>
 
+  <nav class="topbar">
+    <a class="brand" href="#" aria-label="VSHIELD">
+      <svg class="brand-ic" aria-hidden="true"><use href="#shield"/></svg>
+      <span class="brand-name">V<span>SHIELD</span></span>
+    </a>
+    <button id="themeBtn" class="theme" type="button" aria-label="Switch to light theme">
+      <span class="track"><span class="knob"></span></span>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </nav>
+
+  <main class="wrap">
     <header class="hero">
-      <p class="badge"><span class="dot"></span> Analysis tool &mdash; not a login page. Nothing is sent or stored.</p>
-      <h1>Password<br>Strength<br>Analyzer</h1>
-      <p class="lead">Type a password to see how it holds up against common guessing tricks, and why. Everything runs locally in your browser.</p>
+      <p class="badge"><span class="dot"></span> Analysis tool, not a login page. Nothing is sent or stored.</p>
+      <h1>Password Strength Analyzer</h1>
+      <p class="lead">Type a password to see how well it stands up to common guessing tricks, and why. Everything runs locally in your browser.</p>
     </header>
 
     <div class="grid">
-      <!-- LEFT: input + verdict -->
-      <section class="panel scan" aria-labelledby="scan-title">
+      <section class="panel" aria-labelledby="scan-title">
         <h2 id="scan-title">Test a password</h2>
-
         <div class="field">
           <input id="pw" type="password" placeholder="Type a password to analyze" autocomplete="off"
                  autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Password to analyze">
@@ -28,14 +46,17 @@
           <button id="reset" class="btn ghost" type="button">Clear</button>
         </div>
 
-        <div class="verdict" aria-live="polite">
-          <p class="small">Overall result</p>
-          <p id="level" class="level" data-level="none">Waiting for input</p>
-          <div id="meter" class="meter" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Password strength">
-            <i></i><i></i><i></i><i></i><i></i>
+        <div id="verdict" class="verdict" data-level="0" aria-live="polite">
+          <svg class="big-shield" aria-hidden="true"><use href="#shield"/></svg>
+          <div class="v-text">
+            <p class="small">Overall result</p>
+            <p id="level" class="level">Waiting for input</p>
           </div>
-          <p class="stats"><span>Score <b id="score">0</b>/100</span><span>Length <b id="len">0</b></span><span>Est. entropy <b id="ent">0</b> bits</span></p>
         </div>
+        <div id="meter" class="meter" data-level="0" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Password strength">
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <p class="stats"><span>Score <b id="score">0</b>/100</span><span>Length <b id="len">0</b></span><span>Est. entropy <b id="ent">0</b> bits</span></p>
 
         <div class="why">
           <h3>Why this rating</h3>
@@ -45,14 +66,13 @@
         </div>
       </section>
 
-      <!-- RIGHT: checks + generator -->
       <div class="stack">
         <section class="panel" aria-labelledby="checks-title">
           <h2 id="checks-title">Security checks</h2>
           <ul id="checks" class="checks"></ul>
         </section>
 
-        <section class="panel gen" aria-labelledby="gen-title">
+        <section class="panel" aria-labelledby="gen-title">
           <h2 id="gen-title">Generate a stronger one</h2>
           <label class="range" for="genLen">Length: <b id="genLenOut">20</b>
             <input id="genLen" type="range" min="12" max="40" value="20">
@@ -69,7 +89,7 @@
     </div>
 
     <footer class="foot">
-      <p>V1 is an educational tool. A high score lowers the risk of simple guessing attacks; it does not guarantee a password is unbreakable. Use a unique password per account and a password manager.</p>
+      <p><b>VSHIELD</b> Password Strength Analyzer, V1. An educational tool: a high score lowers the risk of simple guessing attacks but does not guarantee a password is unbreakable. Use a unique password per account and a password manager.</p>
     </footer>
   </main>
   <script src="script.js"></script>
