@@ -1,3 +1,4 @@
+
 # 🔐 Password Strength Analyzer
 
 > 🛡️ A web-based cybersecurity tool that analyzes password strength and provides recommendations to create stronger and safer passwords.
@@ -5,6 +6,9 @@
 **Thiranex Cybersecurity Internship — Task 1**
 
 ---
+<img width="1894" height="921" alt="Screenshot (19)" src="https://github.com/user-attachments/assets/9cad1b23-db40-40dc-a957-2d9c0c0ecffc" />
+<img width="1871" height="914" alt="Screenshot (20)" src="https://github.com/user-attachments/assets/d113c829-fdd4-475b-8fba-9d7a29feca46" />
+<img width="1865" height="904" alt="Screenshot (21)" src="https://github.com/user-attachments/assets/b69beddb-d8e5-4fa1-9bd2-f564b4fe40bd" />
 
 ## 📌 Overview
 
